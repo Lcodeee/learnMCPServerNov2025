@@ -189,7 +189,6 @@ class SocialMCPServer {
   async run() {
     const transport = new StdioServerTransport();
     await this.server.connect(transport);
-    console.error("Social MCP Server running on stdio");
   }
 }
 
