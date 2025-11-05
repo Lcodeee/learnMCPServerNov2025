@@ -8,8 +8,11 @@
     "start": "node socialMCP.js"
   },
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^0.4.0",
-    "dotenv": "^17.2.3"
+    "@google/genai": "^1.28.0",
+    "@modelcontextprotocol/sdk": "^1.21.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0"
   },
   "keywords": [
     "mcp",
