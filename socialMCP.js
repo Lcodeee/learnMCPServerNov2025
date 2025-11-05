@@ -63,6 +63,20 @@ class SocialMCPServer {
             required: ["access_token", "message"],
           },
         },
+        {
+          name: "get_random_first_names",
+          description: "Get random first names",
+          inputSchema: {
+            type: "object",
+            properties: {
+              howMany: {
+                type: "number",
+                description: "Number of first names to retrieve",
+              },
+            },
+            required: [],
+          },
+        }
       ],
     }));
 
@@ -74,6 +88,8 @@ class SocialMCPServer {
           return await this.extractGitHubRepoSummary(args.repo_url);
         case "post_to_instagram":
           return await this.postToInstagram(args);
+        case "get_random_first_names":
+          return await this.getRandomFirstNames(args.howMany);
         default:
           throw new Error(`Unknown tool: ${name}`);
       }
@@ -124,6 +140,38 @@ class SocialMCPServer {
           {
             type: "text",
             text: `Error extracting GitHub repo summary: ${error.message}`,
+          },
+        ],
+        isError: true,
+      };
+    }
+  }
+
+
+  async getRandomFirstNames(howMany = 1) {
+    try {
+      const response = await fetch(`https://randomuser.me/api/?results=${howMany}`);
+      if (!response.ok) {
+        throw new Error(`Random User API error: ${response.status}`);
+      }
+
+      const data = await response.json();
+      const firstNames = data.results.map(user => user.name.first);
+
+      return {
+        content: [
+          {
+            type: "text",
+            text: JSON.stringify({ firstNames }, null, 2),
+          },
+        ],
+      };
+    } catch (error) {
+      return {
+        content: [
+          {
+            type: "text",
+            text: `Error fetching random first names: ${error.message}`,
           },
         ],
         isError: true,
