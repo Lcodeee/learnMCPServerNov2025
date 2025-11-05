@@ -1,0 +1,21 @@
+{
+  "name": "social-mcp-server",
+  "version": "1.0.0",
+  "description": "MCP server for GitHub repo summaries and Instagram posting",
+  "main": "socialMCP.js",
+  "type": "module",
+  "scripts": {
+    "start": "node socialMCP.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^0.4.0"
+  },
+  "keywords": [
+    "mcp",
+    "github",
+    "instagram",
+    "social"
+  ],
+  "author": "Your Name",
+  "license": "MIT"
+}
